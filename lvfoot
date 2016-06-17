@@ -1,0 +1,124 @@
+#!/bin/bash 
+NAME=("qztun qzvalue qzonline")
+ls() {
+    local i=0
+    for one in ${NAME[@]}; do
+        let "i+=1"
+        echo "$i) $one"
+    done
+}
+
+login() {
+    local user=$1
+    local ip=$2
+    local port=$3
+    local password=$4
+    local key=$5
+    if [ -z $key ]; then
+        expect -c "
+        spawn ssh -l $user -p $port $2
+        expect {
+        \"*yes/no\" {send \"yes\r\";exp_continue}
+        \"*password:\" {send \"$password\r\"}
+        }
+        send \"cd server/trunk\n\";
+        interact;
+        "
+    else
+        expect -c "
+        spawn ssh -l $user -p $port $2 -i $key
+        interact;
+        "
+    fi
+}
+
+qzonline() {
+    echo "[ZONE 001]"
+    ssh qzs0 "cd server/bin && echo :game count |./shaco config_cmdcli |tail -1 && echo :gate count |./shaco config_cmdcli |tail -1"
+    echo "[ZONE 002]"
+    ssh qzs1 "cd server/bin && echo :game count |./shaco config_cmdcli |tail -1 && echo :gate count |./shaco config_cmdcli |tail -1"
+}
+
+qzvalue() {
+    cd ~/bin && lua qzvalue.lua $@
+}
+qz() {
+    cd ~/bin && lua qz.lua $@
+}
+
+qzdev_pull() {
+    read -s -p "Take care, this will cover your local qzcode ! : "  password
+
+    expect -c "
+    spawn ssh lxj \"cd server/trunk/ && svn up && make proto && make dev\"
+    expect {
+    \"*password:\" {send \"$password\r\"}
+    }
+    interact;
+    "
+
+    expect -c "
+    spawn scp lxj:server/trunk/server_dev.tgz $HOME/
+    expect {
+    \"*password:\" {send \"$password\r\"}
+    }
+    interact;
+    "
+
+    tar -zxf ~/server_dev.tgz -C ~/server_dev
+}
+
+qzdev_push() {
+    read -s -p "push code to qz ! : "  password
+    
+    curpath=`pwd`
+    cd ~/server_dev 
+
+    make dev
+
+    expect -c "
+    spawn scp server_dev.tgz lxj:.
+    expect {
+    \"*password:\" {send \"$password\r\"}
+    }
+    interact;
+    "
+    expect -c "
+    spawn ssh lxj \"tar -zxf server_dev.tgz -C server/trunk/\"
+    expect {
+    \"*password:\" {send \"$password\r\"}
+    }
+    interact;
+    "
+
+    expect -c "
+        spawn ssh lxj
+        expect {
+        \"*password:\" {send \"$password\r\"}
+        }
+        send \"cd server/trunk\n\";
+        interact;
+    "
+
+    cd $curpath
+}
+
+##----------------------------------------------------------------------------
+CMD=$1
+shift
+case $CMD in
+ls) ls;;
+qztun) ssh -o "ServerAliveInterval 60" -fNL 19860:127.0.0.1:19860 qzs1;;
+qzonline) qzonline;;
+qzvalue) qzvalue $@;;
+qz) qz $@;;
+backup) cp ~/bin/lvfoot ~/.ssh/config ~/backup/;;
+redis) cd ~/code/redis-3.0.5/src/ && ./redis-server ../redis.conf;;
+redis-cli) cd ~/code/lshaco && ./shaco examples/config --start "redis-cli" --redis_host 127.0.0.1 --redis_port 17000 --redis_passwd 123456 --console 0;;
+redistt) docker run -d --name redistt -p 17001:6379 -v ~/docker/var/redis:/var/redis lvshaco/redis redis-server /etc/redis/redis.conf --requirepass 123456;;
+redisqz) docker run -d --name redisqz -p 17000:6379 -v ~/docker/var/redisqz:/var/redis lvshaco/redis redis-server /etc/redis/redis.conf --requirepass 123456;;
+nginx) docker run --name nginx -d -p 8080:80 -v ~/sites:/usr/share/nginx/html -v ~/docker/var/nginx:/var/log/nginx -v ~/docker/etc/nginx/default.conf:/etc/nginx/sites-enabled/default lvshaco/nginx;;
+qzdev_pull) qzdev_pull;;
+qzdev_push) qzdev_push;;
+*) echo lvfoot ls;;
+esac

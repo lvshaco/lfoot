@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
+
+import sys
+import urllib
+import json
+
+CODE = {
+    0:  u'正常',
+    20: u'要翻译的文本过长',
+    30: u'无法进行有效的翻译',
+    40: u'不支持的语言类型',
+    50: u'无效的key',
+    60: u'无词典结果，仅在获取词典结果生效',
+}
+URL = 'http://fanyi.youdao.com/openapi.do?keyfrom=guaniufanyi&key=568040004&type=data&doctype=json&version=1.1&'
+
+def translate(s):
+    body={
+        'q':s,
+    }
+    r = urllib.urlopen(URL+urllib.urlencode(body))
+    r = r.read()
+    r = json.loads(r)
+    code = r['errorCode']
+    if code != 0:
+        print CODE[code]
+        return
+    print '+有道翻译----------------------------------------------+\n'
+    if r.has_key('basic'):
+        basic = r['basic']
+        if basic.has_key('uk-phonetic'):
+            print u'%s [英]:[%s] [美]:[%s]'%(s, basic['uk-phonetic'], basic['us-phonetic'])
+        else: 
+            print s 
+        for one in basic['explains']:
+            print one
+    elif r.has_key('translation'):
+        print s
+        print u'翻译: %s'%(', '.join(r['translation']))
+    if r.has_key('web'):
+        print
+        web = r['web']
+        for one in web:
+            print u'[%s] %s'%(one['key'], ', '.join(one['value']))
+    print '+------------------------------------------------------+\n'
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print "usage: %s string"%sys.argv[0]
+        sys.exit(1)
+    translate(sys.argv[1])
