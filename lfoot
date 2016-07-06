@@ -65,7 +65,10 @@ qzdev_pull() {
     interact;
     "
 
-    tar -zxf ~/server_dev.tgz -C ~/server_dev
+    mkdir -pv ~/server_dev && tar -zxf ~/server_dev.tgz -C ~/server_dev
+    cp ~/server/bin/shaco ~/server_dev/bin
+    cp ~/server/bin/*.so ~/server_dev/bin
+    cp ~/server/bin/*.lso ~/server_dev/bin
 }
 
 qzdev_push() {

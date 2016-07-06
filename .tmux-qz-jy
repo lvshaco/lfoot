@@ -1,0 +1,32 @@
+#!/bin/sh
+name=$USER-qz-jy
+tmux_init() 
+{
+    # server
+    tmux new-session -s $name -d -n "qzs1" "ssh qzs1"
+    tmux split-window -h "ssh qzs1"
+   
+    tmux new-window -n "qzs2" "ssh qzs2"
+    tmux split-window -h "ssh qzs2"
+    
+    tmux new-window -n "qzs3" "ssh qzs3"
+    tmux split-window -h "ssh qzs3"
+
+    tmux new-window -n ""
+    tmux new-window -n ""
+    tmux new-window -n ""
+    tmux new-window -n ""
+
+    tmux new-window -n "qzbilling" "ssh qzbilling"
+    tmux split-window -h "ssh qzbilling"
+
+    tmux new-window -n "qzcs" "ssh qzcs"
+    tmux split-window -h "ssh qzcs"
+
+    tmux select-window -t "qzcs"
+    # tmux -2强制启用256color，连接已开启的tmux 
+    tmux -2 attach-session -d           
+}
+if which tmux 2>&1 >/dev/null; then
+    tmux -2 attach -t $name || tmux_init
+fi
