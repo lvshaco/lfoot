@@ -1,0 +1,49 @@
+#!/bin/bash -e
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 mysshgen.config"
+    exit 1
+fi
+cfg=$1
+cfg=`cat $cfg`
+eval $cfg
+
+F=mysshgen-${host}.out
+
+transKey() {
+    host="$1"
+    expect -c "
+    spawn ssh-copy-id -i ${identityFile}.pub $host
+    expect {
+        \"password:\" { send \"$passwd\r\"; exp_continue}
+        \"(yes/no)?\" { send \"yes\r\"; exp_continue}
+        \"]$\" { send "exit\r"}
+    }"
+}
+
+rm $F
+
+i=0
+for ip in ${iplist[@]}; do
+    i=$((i+1))
+    cat>>$F<<EOF
+Host $host$i
+HostName $ip
+Port $port
+User $user
+
+EOF
+done
+
+cat>>$F<<EOF
+Host an*
+IdentityFile $identityFile
+Host ios*
+IdentityFile $identityFile
+
+EOF
+
+echo see: $F
+
+for i in `seq 1 ${#iplist[@]}`; do
+    transKey "$host$i"
+done
