@@ -1,0 +1,41 @@
+#!/bin/bash
+dir=`dirname "$0"`
+
+name=centos
+
+start() {
+	docker ps -a |grep "\<$name\>"
+	if [ $? -ne 0 ]; then
+		docker run -it --name $name \
+			-v/Users/lvshaco/Downloads:/Downloads -v/Users/lvshaco/code:/Code \
+			centos bin/bash
+	else
+		docker start $name
+	fi
+}
+
+stop() {
+	docker ps -a |grep "\<$name\>" |grep Up
+	if [ $? -eq 0 ]; then
+		docker stop $name
+	fi
+}
+
+exec() {
+	docker ps -a |grep "\<$name\>" |grep Up
+	if [ $? -ne 0 ]; then
+		start
+	else
+		docker exec -it $name /bin/bash
+	fi
+}
+
+cmd=$1
+shift
+case $cmd in
+	start) start;;
+	stop)  stop;;
+	exec)  exec;;
+	ps)    docker ps $@;;
+	*) 	   echo unknown command ;;
+esac
