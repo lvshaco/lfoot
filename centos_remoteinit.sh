@@ -22,8 +22,8 @@ remoteinit() {
 		mkdir -pv /Downloads && \
 		mkdir -pv /Code && \
 		cd /Code && \
-		git clone git@github.com:lvshaco/lfoot.git && \
-		git clone git@github.com:lvshaco/lvvim.git"
+		([[ -d lfoot ]] || git clone git@github.com:lvshaco/lfoot.git) && \
+		([[ -d lvvim ]] || git clone git@github.com:lvshaco/lvvim.git)"
 
 	scp ~/Downloads/go1.9.2.linux-amd64.tar $host:/Downloads/
 
