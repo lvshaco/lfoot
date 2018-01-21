@@ -6,6 +6,12 @@ if [[ ! $0 =~ "bash" ]]; then
 	return 1
 fi
 
+# use aliyun mirrors
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl -L http://mirrors.aliyun.com/repo/Centos-7.repo -o /etc/yum.repos.d/CentOS-Base.repo
+yum clean all
+yum makecache
+
 # install base
 yum install -y epel-release
 yum update -y
@@ -32,6 +38,10 @@ timedatectl set-local-rtc 1
 # 设置系统时区为上海
 timedatectl set-timezone Asia/Shanghai
 
+# use `git difftool`
+git config --global diff.tool vimdiff
+git config --global difftool.prompt No
+
 ## install protobuf
 #PB_PKG=/Downloads/protobuf-2.6.1.tar
 #tar -xf $PB_PKG -C /tmp
@@ -43,6 +53,9 @@ timedatectl set-timezone Asia/Shanghai
 mkdir -pv /Downloads
 mkdir -pv /Code
 mkdir -pv /Code/go
+
+[[ -d /Code/lfoot ]] || git clone git@github.com:lvshaco/lfoot.git /Code/lfoot
+[[ -d /Code/lvvim ]] || git clone git@github.com:lvshaco/lvvim.git /Code/lvvim
 
 # install golang
 GO_PKG=/Downloads/go1.9.2.linux-amd64.tar
@@ -73,3 +86,7 @@ fi
 if [ ! -e ~/code ]; then
     ln -s /Code ~/code
 fi
+
+cd /code/lvvim && make && cd -
+cp ~/gitdiffwrap /usr/bin/
+cp ~/svndiffwrap /usr/bin/

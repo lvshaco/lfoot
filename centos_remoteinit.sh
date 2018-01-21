@@ -18,13 +18,7 @@ remoteinit() {
 
 	scp ~/.ssh/id_rsa_lvshaco ~/.ssh/config $host:~/.ssh/
 
-	ssh $host "yum install -y git && \
-		mkdir -pv /Downloads && \
-		mkdir -pv /Code && \
-		cd /Code && \
-		([[ -d lfoot ]] || git clone git@github.com:lvshaco/lfoot.git) && \
-		([[ -d lvvim ]] || git clone git@github.com:lvshaco/lvvim.git)"
-
+	ssh $host "mkdir -pv /Downloads"
 	scp ~/Downloads/go1.9.2.linux-amd64.tar $host:/Downloads/
 
 	ssh $host "source ~/.bash_profile && source /Code/lfoot/${itype}_init.sh"
