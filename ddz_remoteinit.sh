@@ -13,8 +13,8 @@ ssh-copy-id -i ~/.ssh/$sshkey_file.pub $host
 
 scp ~/.ssh/id_rsa_lvshaco ~/.ssh/config $host:~/.ssh/
 
-ssh $host "mkdir /Downloads && \
-	mkdir /Code && \
+ssh $host "mkdir -pv /Downloads && \
+	mkdir -pv /Code && \
 	cd /Code && \
 	git clone git@github.com:lvshaco/lfoot.git \
 	git clone git@github.com:lvshaco/lvvim.git"
