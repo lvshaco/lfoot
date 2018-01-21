@@ -5,5 +5,6 @@ shift
 case $cmd in
     fanyi) cd $dir && ./fanyi $@;;
     ctime) python -c "import time; print time.ctime($@)";;
+	mount_ddz) sshfs local:/root/ddz ~/code/ddz;;
     *) echo unkown command;;
 esac
