@@ -27,6 +27,6 @@ done
 # ddz
 cd ~
 if [ ! -e ddz ]; then
-	git clone https://github.com/lvshaco/ddz.git
+	git git@github.com:lvshaco/ddz.git
 fi
 cd ddz && ./foot build
