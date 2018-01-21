@@ -57,12 +57,12 @@ if [[ ! "$GOROOT" =~ "/usr/local/go" ]]; then
 	export GOROOT=/usr/local/go
 	echo export GOROOT=/usr/local/go >> ~/.bash_profile
 fi
-if [[ ! "$GOPATH" =~ "\$HOME/go" ]]; then
-	export GOPATH=\$HOME/go
+if [[ ! "$GOPATH" =~ "$HOME/go" ]]; then
+	export GOPATH=$HOME/go
 	echo export GOPATH=\$HOME/go >> ~/.bash_profile
 fi
-if [[ ! "$PATH" =~ "\$GOROOT/bin" ]]; then
-	export PATH=\$GOROOT/bin:\$PATH
+if [[ ! "$PATH" =~ "$GOROOT/bin" ]]; then
+	export PATH=$GOROOT/bin:$PATH
 	echo export PATH=\$GOROOT/bin:\$PATH >> ~/.bash_profile
 fi
 

@@ -9,10 +9,9 @@ dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 source $dir/centos_init.sh
 
 # go path
-MYLIB_PATH="\$HOME/ddz/Server/tool"
 if [[ ! "$GOPATH" =~ "$MYLIB_PATH" ]]; then
-	export GOPATH=$MYLIB_PATH:\$GOPATH
-	echo export GOPATH=$MYLIB_PATH:\$GOPATH >> ~/.bash_profile
+	export GOPATH=$HOME/ddz/Server/tool:$GOPATH
+	echo export GOPATH=\$HOME/ddz/Server/tool:\$GOPATH >> ~/.bash_profile
 fi
 
 # ddz golang lib
