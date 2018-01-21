@@ -1,14 +1,23 @@
 #!/bin/bash
 dir=`dirname "$0"`
 
-name=centos
+name=centos7-systemd
+
+pull() {
+	cd "$dir" &&
+	docker build --rm -t $name -f ./docker/$name.Dockerfile docker
+}
 
 start() {
 	docker ps -a |grep "\<$name\>"
 	if [ $? -ne 0 ]; then
-		docker run -it --name $name \
+		# systemd无法工作，所以使用centos7-systemd.Dockerfile创建镜像，并使用此命令创建容器
+		docker run -d --cap-add SYS_ADMIN --name $name \
 			-v/Users/lvshaco/Downloads:/Downloads -v/Users/lvshaco/code:/Code \
-			centos bin/bash
+			$name /sbin/init
+		#docker run -it --name $name \
+		#	-v/Users/lvshaco/Downloads:/Downloads -v/Users/lvshaco/code:/Code \
+		#	centos bin/bash
 	else
 		docker start $name
 	fi
@@ -26,13 +35,14 @@ exec() {
 	if [ $? -ne 0 ]; then
 		start
 	else
-		docker exec -it $name /bin/bash
+		docker exec -it $name bash
 	fi
 }
 
 cmd=$1
 shift
 case $cmd in
+	pull)  pull;;
 	start) start;;
 	stop)  stop;;
 	exec)  exec;;
