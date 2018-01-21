@@ -17,7 +17,9 @@ yum install -y man \
 	make \
 	cmake \
 	file \
-	python-devel
+	python-devel \
+	ctags \
+	cscope
 
 # 将硬件时钟调整为与本地时钟一致, 0 为设为 UTC 时间
 timedatectl set-local-rtc 1
