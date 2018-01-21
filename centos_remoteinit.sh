@@ -1,7 +1,7 @@
 #!/bin/bash -ev
 
 # I use export, so must use source
-if [ $0 != "-bash" ]; then
+if [[ ! $0 =~ "bash" ]]; then
 	echo "Use source to execute this script!"
 	exit 1
 fi

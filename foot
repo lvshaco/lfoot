@@ -1,5 +1,4 @@
 #!/bin/bash
-
 SERVERS=("game" "state" "billing")
 
 S_RUNNING="running"
