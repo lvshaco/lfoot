@@ -9,7 +9,7 @@ dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 source $dir/centos_init.sh
 
 # go path
-if [[ ! "$GOPATH" =~ "$MYLIB_PATH" ]]; then
+if [[ ! "$GOPATH" =~ "$HOME/ddz/Server/tool" ]]; then
 	export GOPATH=$HOME/ddz/Server/tool:$GOPATH
 	echo export GOPATH=\$HOME/ddz/Server/tool:\$GOPATH >> ~/.bash_profile
 fi
