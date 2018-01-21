@@ -8,13 +8,16 @@ yum install -y man \
 	man-pages.noarch \
 	man-pages-overrides.noarch \
 	net-tools \
+	telnet \
 	wget \
 	vim \
 	tmux \
 	git \
 	gcc-c++ \
 	make \
-	file
+	cmake \
+	file \
+	python-devel
 
 # 将硬件时钟调整为与本地时钟一致, 0 为设为 UTC 时间
 timedatectl set-local-rtc 1
