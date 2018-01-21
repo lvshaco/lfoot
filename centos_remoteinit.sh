@@ -25,3 +25,4 @@ remoteinit() {
 }
 
 remoteinit $1
+sshfs local:/root/ddz ~/code/ddz
