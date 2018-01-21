@@ -1,5 +1,11 @@
 #!/bin/bash -ev
 
+# I use export, so must use source
+if [ $0 != "-bash" ]; then
+	echo "Use `source` to execute this script!"
+	exit 1
+fi
+
 # install base
 yum install -y epel-release
 yum update -y
@@ -33,6 +39,10 @@ timedatectl set-timezone Asia/Shanghai
 #./configure && make && make install 
 #rm -rf protobuf-2.6.1 
 #cd -
+
+mkdir -pv /Downloads
+mkdir -pv /Code
+mkdir -pv /Code/go
 
 # install golang
 GO_PKG=/Downloads/go1.9.2.linux-amd64.tar

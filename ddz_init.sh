@@ -1,13 +1,18 @@
 #!/bin/bash -ev
 
-#dir=`dirname "$0"`
-#$dir/centos_init
+# I use export, so must use source
+if [ $0 != "-bash" ]; then
+	echo "Use `source` to execute this script!"
+	exit 1
+fi
+
+dir=`dirname "$0"`
+source $dir/centos_init.sh
 
 # go path
 MYLIB_PATH="\$HOME/ddz/Server/tool"
 if [[ ! "$GOPATH" =~ "$MYLIB_PATH" ]]; then
 	export GOPATH=$MYLIB_PATH:\$GOPATH
-	echo $GOPATH --
 	echo export GOPATH=$MYLIB_PATH:\$GOPATH >> ~/.bash_profile
 fi
 
