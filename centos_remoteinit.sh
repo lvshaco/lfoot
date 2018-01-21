@@ -22,4 +22,4 @@ ssh $host "yum install -y git && \
 
 scp ~/Downloads/go1.9.2.linux-amd64.tar $host:/Downloads/
 
-ssh $host "source /Code/lfoot/ddz_init.sh"
+ssh $host "source /Code/lfoot/centos_init.sh"
