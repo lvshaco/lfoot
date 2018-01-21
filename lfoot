@@ -1,5 +1,5 @@
 #!/bin/bash 
-dir=`dirname "$0"`
+dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 cmd=$1
 shift
 case $cmd in

@@ -3,7 +3,7 @@
 # I use export, so must use source
 if [[ ! $0 =~ "bash" ]]; then
 	echo "Use source to execute this script!"
-	exit 1
+	return 1
 fi
 
 # install base

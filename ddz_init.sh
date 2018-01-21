@@ -3,10 +3,9 @@
 # I use export, so must use source
 if [[ ! $0 =~ "bash" ]]; then
 	echo "Use source to execute this script!"
-	exit 1
+	return 1
 fi
-
-dir=`dirname "$0"`
+dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 source $dir/centos_init.sh
 
 # go path
@@ -25,7 +24,7 @@ for lib in ${libs[@]}; do
 	go build && go install &&
 	cd -
 done
-exit 1
+
 # ddz
 cd ~
 if [ ! -e ddz ]; then
