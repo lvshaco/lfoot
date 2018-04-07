@@ -5,6 +5,8 @@ NAME=centos7
 start() {
 	if ! ison; then
 		VBoxManage startvm $NAME --type headless
+	else
+		echo $NAME ON
 	fi
 }
 
