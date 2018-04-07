@@ -1,0 +1,33 @@
+#!/bin/bash 
+dir=$(cd $(dirname $BASH_SOURCE) && pwd)
+
+NAME=centos7
+start() {
+	if ! ison; then
+		VBoxManage startvm $NAME --type headless
+	fi
+}
+
+stop() {
+	VBoxManage controlvm $NAME savestate
+}
+
+ison() {
+	R=$(VBoxManage list runningvms |awk '{print $1}')
+	for name in ${R[@]};do
+		if [ $name == \"$NAME\" ]; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+cmd=$1
+shift
+case $cmd in
+    start) 		start;;
+	stop)		stop;;
+	login)		start && ssh local;;
+	list)		VBoxManage list runningvms;;
+    *) echo "Usage: $0 start|stop|login|list";;
+esac
