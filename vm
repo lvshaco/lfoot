@@ -29,7 +29,7 @@ shift
 case $cmd in
     start) 		start;;
 	stop)		stop;;
-	login)		start && ssh local;;
+	login)		start && ssh $1;;
 	list)		VBoxManage list runningvms;;
     *) echo "Usage: $0 start|stop|login|list";;
 esac
