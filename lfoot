@@ -5,6 +5,10 @@ shift
 case $cmd in
     fanyi) cd $dir && ./fanyi $@;;
     ctime) python -c "import time; print time.ctime($@)";;
-	mount_ddz) sshfs local:/root/ddz ~/ddz;;
+	mount_ddz) sshfs local:/root/lddz ~/lddz;;
+	lddz) scp local:~/protocol.proto local:~/lddz/lualib/error.lua local:~/lddz/lualib/card.lua ~;;
+    pass) cat ~/Dropbox/pass;;
+    edit) vim $dir/lfoot;;
+    ci) cd $dir && git commit -a -m "$1" && git push;;
     *) echo unkown command;;
 esac
