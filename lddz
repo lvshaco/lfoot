@@ -1,0 +1,12 @@
+#!/bin/bash 
+dir=$(cd $(dirname $BASH_SOURCE) && pwd)
+cmd=$1
+shift
+case $cmd in
+	mount) sshfs local_dev:/home/lxj/lddz ~/lddz;;
+	client) scp local_dev:~/protocol.proto local_dev:~/lddz/lualib/share/error.lua local_dev:~/lddz/lualib/room/card.lua local_dev:~/lddz/res/json/recharge.json ~;;
+    online) ssh lddz_1 "cat <(echo info a count) - | nc -i 1 localhost 8000" ;;
+    edit) vim $dir/lddz;;
+    ci) cd $dir && git commit -a -m "fix" && git push;;
+    *) echo unkown command;;
+esac
