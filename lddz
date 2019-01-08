@@ -4,9 +4,9 @@ cmd=$1
 shift
 case $cmd in
 	mount) sshfs local_dev:/home/lxj/lddz ~/lddz;;
-	client) scp local_dev:~/protocol.proto local_dev:~/lddz/lualib/share/error.lua local_dev:~/lddz/lualib/room/card.lua local_dev:~/lddz/res/json/recharge.json ~;;
-    user_count) ssh lddz_1 "./util.sh user_count" ;;
-    room_count) ssh lddz_1 "./util.sh room_count" ;;
+	client) scp local_dev:~/protocol.proto local_dev:~/error.lua ~;;
+    user_count) ssh lddz_hulu "./util.sh user_count" ;;
+    room_count) ssh lddz_hulu "./util.sh room_count" ;;
     edit) vim $dir/lddz;;
     ci) cd $dir && git commit -a -m "fix" && git push;;
     *) echo unkown command;;

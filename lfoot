@@ -10,5 +10,6 @@ case $cmd in
     pass) cat ~/Dropbox/pass;;
     edit) vim $dir/lfoot;;
     ci) cd $dir && git commit -a -m "$1" && git push;;
+    hulu) ssh lddz_hulu "./util.sh user_count; ./util.sh room_count";;
     *) echo unkown command;;
 esac
