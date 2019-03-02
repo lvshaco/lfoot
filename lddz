@@ -1,4 +1,10 @@
 #!/bin/bash
+
+gm_score() {
+    D=`date '+%Y%m%d'`
+    ssh lddz_hulu "./test.sh gm_score $D,$D"
+}
+
 dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 cmd=$1
 shift
@@ -9,5 +15,6 @@ case $cmd in
     room_count) ssh lddz_hulu "./util.sh room_count" ;;
     edit) vim $dir/lddz;;
     ci) cd $dir && git commit -a -m "fix" && git push;;
+    gm_score) gm_score;;
     *) echo unkown command;;
 esac
