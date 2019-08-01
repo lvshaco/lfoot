@@ -1,4 +1,13 @@
 #!/bin/bash 
+
+usage() {
+    cat << EOF
+Usage: $0 cmd
+体脂率:     $0 BFR 体重(公斤) 腰围(厘米)
+体质指数:   $0 BMI 体重(公斤) 身高(米)
+EOF
+}
+
 dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 cmd=$1
 shift
@@ -10,5 +19,7 @@ case $cmd in
     edit) vim $dir/lfoot;;
     ci) cd $dir && git commit -a -m "$1" && git push;;
     hulu) ssh lddz_hulu "./util.sh user_count; ./util.sh room_count";;
-    *) echo unkown command;;
+    BFR) echo "scale=3; (($2*0.74) - ($1 * 0.082 + 44.74)) / $1" | bc;;
+    BMI) echo "scale=3; $1 / ($2*$2)" | bc;;
+    *) usage;;
 esac
