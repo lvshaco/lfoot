@@ -21,5 +21,6 @@ case $cmd in
     hulu) ssh lddz_hulu "./util.sh user_count; ./util.sh room_count";;
     BFR) echo "scale=3; (($2*0.74) - ($1 * 0.082 + 44.74)) / $1" | bc;;
     BMI) echo "scale=3; $1 / ($2*$2)" | bc;;
+    start_web) nginx && php-fpm;;
     *) usage;;
 esac
