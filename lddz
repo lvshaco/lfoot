@@ -12,6 +12,7 @@ shift
 case $cmd in
 	mount) sshfs local_dev:/home/lxj/lddz ~/lddz;;
 	client) scp local_dev:~/protocol.proto \
+        local_dev:~/protocolInfo.lua \
         local_dev:~/error.lua \
         local_dev:~/recharge.json \
         local_dev:~/*.md \
