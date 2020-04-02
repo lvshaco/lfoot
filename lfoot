@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 usage() {
     cat << EOF
@@ -14,7 +14,6 @@ shift
 case $cmd in
     fanyi) cd $dir && ./fanyi $@;;
     ctime) python -c "import time; print time.ctime($@)";;
-	mount_ddz) sshfs local_dev:/home/lxj/lddz ~/lddz;;
     pass) cat ~/Dropbox/pass;;
     edit) vim $dir/lfoot;;
     ci) cd $dir && git commit -a -m "$1" && git push;;

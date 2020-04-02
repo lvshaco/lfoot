@@ -10,7 +10,7 @@ dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 cmd=$1
 shift
 case $cmd in
-	mount) sshfs local_dev:/home/lxj/lddz ~/lddz;;
+	mount) sshfs local_dev:/home/lxj/code/guandan ~/guandan;;
 	client) scp local_dev:~/protocol.proto \
         local_dev:~/protocolInfo.lua \
         local_dev:~/error.lua \
@@ -22,5 +22,7 @@ case $cmd in
     edit) vim $dir/lddz;;
     ci) cd $dir && git commit -a -m "fix" && git push;;
     gm_score) gm_score $1;;
+    push_res) scp recharge~充值表.xlsx local_dev:code/guandan/res/xlsx/recharge~充值表.xlsx;;
+    pull_res) scp local_dev:code/guandan/res/xlsx/recharge~充值表.xlsx recharge~充值表.xlsx;;
     *) echo unkown command;;
 esac
