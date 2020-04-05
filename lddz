@@ -22,7 +22,7 @@ case $cmd in
     edit) vim $dir/lddz;;
     ci) cd $dir && git commit -a -m "fix" && git push;;
     gm_score) gm_score $1;;
-    push_res) scp recharge~充值表.xlsx local_dev:code/guandan/res/xlsx/recharge~充值表.xlsx;;
-    pull_res) scp local_dev:code/guandan/res/xlsx/recharge~充值表.xlsx recharge~充值表.xlsx;;
+    push_res) scp -r ~/gouji-plan/res/xlsx local_dev:code/guandan/res/;;
+    pull_res) scp -r local_dev:code/guandan/res/xlsx ~/gouji-plan/res/;;
     *) echo unkown command;;
 esac
