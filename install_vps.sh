@@ -66,6 +66,7 @@ reboot
 #sysctl net.ipv4.tcp_congestion_control
 #lsmod | grep bbr
 
+## 无用了 ---------------------
 #wget https://sourceforge.net/projects/leanote-bin/files/2.6.1/leanote-linux-amd64-v2.6.1.bin.tar.gz/download
 #tar -xf download
 #yum -y install mongodb-server mongodb
