@@ -38,12 +38,8 @@ systemctl start shadowsocks
 #ssserver -c /etc/shadowsocks.json -d start
 ## ssserver -c /etc/shadowsocks.json -d stop
 
-firewall-cmd --zone=public --add-port=19001/tcp --permanent
-firewall-cmd --zone=public --add-port=19002/tcp --permanent
-firewall-cmd --zone=public --add-port=19003/tcp --permanent
-firewall-cmd --zone=public --add-port=19004/tcp --permanent
-firewall-cmd --zone=public --add-port=19005/tcp --permanent
-firewall-cmd --zone=public --add-port=18000/tcp --permanent
+firewall-cmd --zone=public --add-port=19000-19100/tcp --permanent
+firewall-cmd --zone=public --add-port=18000-18100/tcp --permanent
 firewall-cmd --reload
 
 #wget https://sourceforge.net/projects/leanote-bin/files/2.6.1/leanote-linux-amd64-v2.6.1.bin.tar.gz/download
