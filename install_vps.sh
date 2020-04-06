@@ -42,6 +42,30 @@ firewall-cmd --zone=public --add-port=19000-19100/tcp --permanent
 firewall-cmd --zone=public --add-port=18000-18100/tcp --permanent
 firewall-cmd --reload
 
+#----------------------------------------------
+# TCP BBR拥塞算法
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+yum --enablerepo=elrepo-kernel install kernel-ml -y
+
+#更新grub文件并重启
+egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
+grub2-set-default 0
+reboot
+
+## 开机后验证
+#uname -r
+#
+## 启动TCP BBR
+#echo "net.core.default_qdisc = fq" >> /etc/sysctl.conf
+#echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
+#sysctl -p
+#
+## 验证
+#sysctl net.ipv4.tcp_available_congestion_control
+#sysctl net.ipv4.tcp_congestion_control
+#lsmod | grep bbr
+
 #wget https://sourceforge.net/projects/leanote-bin/files/2.6.1/leanote-linux-amd64-v2.6.1.bin.tar.gz/download
 #tar -xf download
 #yum -y install mongodb-server mongodb
