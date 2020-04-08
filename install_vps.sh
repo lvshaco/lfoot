@@ -60,7 +60,11 @@ reboot
 #echo "net.core.default_qdisc = fq" >> /etc/sysctl.conf
 #echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
 #sysctl -p
-#
+# 或则sudo情况如下处理
+#echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
+#echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+#sudo sysctl -p
+
 ## 验证
 #sysctl net.ipv4.tcp_available_congestion_control
 #sysctl net.ipv4.tcp_congestion_control
