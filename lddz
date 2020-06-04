@@ -24,5 +24,6 @@ case $cmd in
     gm_score) gm_score $1;;
     push_res) scp -r ~/gouji-plan/res/xlsx local_dev:code/guandan/res/;;
     pull_res) scp -r local_dev:code/guandan/res/xlsx ~/gouji-plan/res/;;
+    up_res) cd ~/gouji-plan/res && svn up && cd - && lddz push_res && ssh local_dev "cd code/guandan/ && make res && ./dist.sh dist";;
     *) echo unkown command;;
 esac
