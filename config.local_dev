@@ -1,0 +1,475 @@
+# 共享连接通道
+#Host *
+#ServerAliveInterval 60
+#ControlMaster auto
+#ControlPath ~/.ssh/master-%r@%h:%p
+
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+Host gitee.com
+HostName gitee.com
+User git
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+#Host pi
+#HostName 192.168.1.208
+#User pi
+#Port 22
+#IdentityFile ~/.ssh/id_rsa_lvshaco
+
+Host local
+HostName 192.168.99.100
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host local_dev
+HostName 192.168.99.100
+User lxj
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host pi
+HostName 10.0.0.12
+User pi
+Port 22
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+Host pi0
+#HostName raspberrypi.local
+HostName 192.168.2.65
+User pi
+Port 22
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+Host vps0
+#HostName 202.182.110.216
+HostName 149.28.128.209
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+Host vps
+#HostName 202.182.110.216
+HostName 18.179.200.19
+User centos
+Port 22
+IdentityFile ~/.ssh/id_rsa_lvshaco
+
+# qz alpha, jy
+Host qz
+HostName 106.14.248.203
+User qz
+Port 22
+
+# 充值回调接口
+Host qzbilling
+HostName 106.14.248.203
+User qzbilling
+Port 22
+
+#Host qzsource
+#HostName 42.51.11.103
+#User qz
+#Port 22
+
+Host qztun
+LocalForward 19860 localhost:19860
+HostName 106.14.248.203
+User qz
+Port 22
+
+Host qztunr
+HostName 42.51.11.196
+User qz
+Port 22
+
+Host qzcsroot
+HostName 42.51.11.103
+User root
+Port 22
+
+# 导入服
+Host qzcs2
+HostName 42.51.11.103
+User qzs0
+Port 22
+
+# 先行服
+Host qzcs
+HostName 42.51.11.103
+User qzcs
+Port 22
+
+Host qzs0
+HostName 42.51.11.103
+User qzs0
+Port 22
+
+# 1服
+Host qzs1
+HostName 106.14.248.203
+User qzs1
+Port 22
+
+Host qzs2
+HostName 42.51.11.209
+User game
+Port 22
+
+Host qzs3
+HostName 42.51.11.49
+User game
+Port 22
+
+Host qzs4
+HostName 42.51.11.196
+User game
+Port 22
+
+# ios审核服
+Host qzios
+HostName 42.51.11.196
+User qzs5
+Port 22
+
+Host qzweber2
+HostName 42.51.11.196
+User qz
+Port 22
+
+#-----------
+# qz outer
+#-----------
+# 测试服
+Host qzbuilder
+HostName 120.131.81.123
+User builder
+Port 22422
+
+# 外网服
+Host qzbanshu
+HostName 106.14.248.203
+User qzbanshu
+Port 22
+
+# 外网一区
+Host qzbanshu39
+HostName 120.131.81.123
+User qz_server_360
+Port 22422
+
+# 双软服（废弃）
+Host qzsr
+HostName 120.131.81.123
+User qz_server_uc
+Port 22422
+
+Host qzweber1
+HostName 120.131.81.123
+User qzweber
+Port 22422
+
+# coolsoft
+Host qzdev_lxj
+HostName localhost
+User game
+Port 19860
+
+Host qzdev_jie
+HostName localhost
+User jie
+Port 19860
+
+############################
+# passwd: 123456Zjf
+# agartt
+Host tt
+HostName 120.76.247.49
+User game
+Port 22
+IdentityFile ~/.ssh/id_rsa_coolsoft
+
+Host agar1
+HostName 120.76.247.49
+User agar1
+Port 22
+IdentityFile ~/.ssh/id_rsa_coolsoft
+
+Host agar2
+HostName 120.76.247.49
+User agar2
+Port 22
+IdentityFile ~/.ssh/id_rsa_coolsoft
+
+Host qzsource
+HostName 120.76.247.49
+User game
+Port 22
+IdentityFile ~/.ssh/id_rsa_coolsoft
+# other
+Host other
+HostName 120.27.158.73
+User root
+
+# 7z
+Host press
+HostName 120.92.45.86
+User root
+Port 22
+
+Host robot
+HostName 120.92.45.85
+User root
+Port 22
+
+Host lddz_local
+HostName 10.0.0.250
+User lddz_local
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host zyd
+HostName 116.62.32.219
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test
+HostName 116.62.32.219
+User lddz_test
+Port 22
+
+IdentityFile ~/.ssh/id_rsa_dev
+Host lddz_test_hulu_hall
+HostName 116.62.32.219
+User lddz_test_hulu_hall
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_niuniu
+HostName 116.62.32.219
+User lddz_test_niuniu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_niuniu2
+HostName 116.62.32.219
+User lddz_test_niuniu2
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_niuniu100
+HostName 116.62.32.219
+User lddz_test_niuniu100
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_gdy
+HostName 116.62.32.219
+User lddz_test_gdy
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_hulu
+HostName 116.62.32.219
+User lddz_test_hulu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_hulu2
+HostName 116.62.32.219
+User lddz_test_hulu2
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_new13
+HostName 116.62.32.219
+User lddz_test_new13
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_all13
+HostName 116.62.32.219
+User lddz_test_all13
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_guandan
+HostName 116.62.32.219
+User lddz_test_guandan
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_gouji
+HostName 116.62.32.219
+User lddz_test_gouji
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_gouji0
+HostName 116.62.32.219
+User lddz_gouji0
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_temp
+HostName 116.62.32.219
+User lddz_test_temp
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_gouji
+HostName 103.46.12.67
+User lddz_gouji
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_gouji_root
+HostName 103.46.12.67
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_temp2
+HostName 116.62.32.219
+User lddz_test_temp2
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_old
+HostName 47.98.237.64
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_1_old
+HostName 47.98.237.64
+User lddz_1
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+ProxyCommand ssh lddz_test@lddz_test -W %h:%p
+
+Host lddz
+HostName 43.225.180.231
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_1
+HostName 43.225.180.231
+User lddz_1
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+#ProxyCommand ssh lddz_test@lddz_test -W %h:%p
+#
+Host lddz_niuniu
+HostName 43.225.180.231
+User lddz_niuniu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_niuniu2
+HostName 43.225.180.231
+User lddz_niuniu2
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_niuniu3
+HostName 43.225.180.231
+User lddz_niuniu3
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_hulu
+HostName 43.225.180.231
+User lddz_hulu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+#ProxyCommand ssh lddz_test@lddz_test -W %h:%p
+
+Host lddz_new13
+HostName 43.225.180.231
+User lddz_new13
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_laiwan
+HostName 43.225.180.231
+User lddz_laiwan
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+
+#################################
+Host lddz_laiwan_root
+HostName 103.46.12.161
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+#################################
+Host lddz_nxm_root
+HostName 103.208.33.83
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_nxm
+HostName 103.208.33.83
+User lddz_nxm
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host hotup-nxm
+HostName 103.208.33.83
+User hotup-nxm
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+#################################
+Host lddz_zhongwan_root
+HostName 103.46.12.158
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_zhongwan
+HostName 103.46.12.158
+User lddz_zhongwan
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host hotup-zhongwan
+HostName 103.46.12.158
+User hotup-zhongwan
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host fu_mj
+HostName 103.46.12.158
+User fu_mj
+Port 22
+IdentityFile ~/.ssh/id_rsa_mj
+
+Host lddz_shorturl
+#HostName 103.46.12.158
+#User lddz_zhongwan
+HostName 43.225.180.231
+User lddz_hulu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+############################
+Host lddz_svn
+HostName 47.114.61.94
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_svn1
+HostName 47.114.61.94
+User lddz_svn1
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev

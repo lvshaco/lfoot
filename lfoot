@@ -16,10 +16,11 @@ case $cmd in
     ctime) python -c "import time; print time.ctime($@)";;
     pass) cat ~/Dropbox/pass;;
     edit) vim $dir/lfoot;;
-    ci) cd $dir && git commit -a -m "$1" && git push;;
+    ci) cd $dir && git commit -a -m "update" && git push;;
     hulu) ssh lddz_hulu "./util.sh user_count; ./util.sh room_count";;
     BFR) echo "scale=3; (($2*0.74) - ($1 * 0.082 + 44.74)) / $1" | bc;;
     BMI) echo "scale=3; $1 / ($2*$2)" | bc;;
     start_web) nginx && php-fpm;;
+    ssh_config) scp local_dev:~/.ssh/config config.local_dev; cp ~/.ssh/config config.local;;
     *) usage;;
 esac
