@@ -13,7 +13,19 @@ cmd=$1
 shift
 case $cmd in
     fanyi) cd $dir && ./fanyi $@;;
-    ctime) python -c "import time; print time.ctime($@)";;
+    ctime) python -c "
+import time;
+timeArray = time.localtime($@);
+print time.strftime('%Y%m%d %H:%M:%S',timeArray);
+";;
+    time) python -c "
+import time
+import datetime
+d = datetime.datetime.strptime('$@', '%Y%m%d %H:%M:%S')
+t = d.timetuple()
+timeStamp = int(time.mktime(t))
+print(timeStamp)
+";;
     pass) cat ~/Dropbox/pass;;
     edit) vim $dir/lfoot;;
     ci) cd $dir && git commit -a -m "update" && git push;;
