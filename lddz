@@ -10,7 +10,7 @@ dir=$(cd $(dirname $BASH_SOURCE) && pwd)
 cmd=$1
 shift
 case $cmd in
-	mount) sshfs local_dev:/home/lxj/code/guandan ~/guandan;;
+	mount) sshfs local_dev:/home/lxj/code/gouji ~/gouji;;
 	client) scp local_dev:~/protocol.proto \
         local_dev:~/protocolInfo.lua \
         local_dev:~/error.lua \
@@ -22,8 +22,8 @@ case $cmd in
     edit) vim $dir/lddz;;
     ci) cd $dir && git commit -a -m "fix" && git push;;
     gm_score) gm_score $1;;
-    push_res) scp -r ~/gouji-plan/res/xlsx local_dev:code/guandan/res/;;
-    pull_res) scp -r local_dev:code/guandan/res/xlsx ~/gouji-plan/res/;;
-    up_res) cd ~/gouji-plan/res && svn up && cd - && lddz push_res && ssh local_dev "cd code/guandan/ && make res && ./dist.sh dist";;
+    push_res) scp -r ~/gouji-plan/res/xlsx local_dev:code/gouji/res/;;
+    pull_res) scp -r local_dev:code/gouji/res/xlsx ~/gouji-plan/res/;;
+    up_res) cd ~/gouji-plan/res && svn up && cd - && lddz push_res && ssh local_dev "cd code/gouji/ && make res && ./dist.sh dist";;
     *) echo unkown command;;
 esac
