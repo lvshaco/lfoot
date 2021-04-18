@@ -286,6 +286,12 @@ User lddz_test_hulu2
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
 
+Host lddz_test_hulugx
+HostName 116.62.32.219
+User lddz_test_hulugx
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
 Host lddz_test_new13
 HostName 116.62.32.219
 User lddz_test_new13
@@ -471,5 +477,11 @@ IdentityFile ~/.ssh/id_rsa_dev
 Host lddz_svn1
 HostName 47.114.61.94
 User lddz_svn1
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_res
+HostName 43.225.180.230
+User root
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
