@@ -18,6 +18,9 @@ stop() {
 
 login() {
     start
+    # 中文乱码
+    # env LANG=C.UTF-8
+    # 安装localedef -v -c -i en_US -f UTF-8 C.UTF-8
     docker exec -w /root -it $NAME env LANG=C.UTF-8 /bin/bash
     #docker exec -w /root -it $NAME /bin/bash
 }
