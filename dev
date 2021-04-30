@@ -13,12 +13,13 @@ start() {
 }
 
 stop() {
-    docker stop $NAME
+    docker stop -t 0 $NAME
 }
 
 login() {
     start
-    docker exec -w /root -it $NAME /bin/bash
+    docker exec -w /root -it $NAME env LANG=C.UTF-8 /bin/bash
+    #docker exec -w /root -it $NAME /bin/bash
 }
 
 cmd=$1
