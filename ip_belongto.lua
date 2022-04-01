@@ -11,6 +11,9 @@ if #args < 2 then
     print("  Province[Code] 指定省份或省份代码")
     print("  ip[file] 指定单个ip或ip列表文件(每行1个ip)")
     print("  Province Code:")
+    print("  从游戏日志中获取ip到ip.txt:")
+    print("    cat run/log |grep 'ip=' |grep device= | awk -F ' ' '{print $7}' |awk -F '=' '{print $2}' >> ip.txt")
+    print("    cat ip.txt |sort|uniq -c|sort -k 1 -n -r > ip.1")
     for i, v in ipairs(SCODE) do
         print(string.format("  %s %s", PROV[i], v))
     end
