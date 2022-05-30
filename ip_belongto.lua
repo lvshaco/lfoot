@@ -5,17 +5,17 @@ local PROV  = {"北京","上海","广东","江苏","浙江","重庆","安徽","�
 "青海","山东","山西","陕西","四川","天津","云南","香港"}
 
 local args = {...}
-print (#args)
 if #args < 2 then
     print("usage: lua ip_belongto.lua Province[Code] ip[file]")
     print("  Province[Code] 指定省份或省份代码")
     print("  ip[file] 指定单个ip或ip列表文件(每行1个ip)")
     print("  Province Code:")
     print("  从游戏日志中获取ip到ip.txt:")
+    print("    ls run/*.gz | xargs gzip -df")
     print("    cat run/log |grep 'ip=' |grep device= | awk -F ' ' '{print $7}' |awk -F '=' '{print $2}' >> ip.txt")
     print("    或者批量:")
     print("    for f in run/log*; do cat $f |grep 'ip=' |grep device= | awk -F ' ' '{print $7}' |awk -F '=' '{print $2}' >> ip.txt; done")
-    print("    cat ip.txt |sort|uniq -c|sort -k 1 -n -r > ip.1")
+    print("    cat ip.txt |sort|uniq -c|sort -k 1 -n -r |awk '{print $2}' > ip.1")
     for i, v in ipairs(SCODE) do
         print(string.format("  %s %s", PROV[i], v))
     end
@@ -90,25 +90,34 @@ local function isIP(s)
     b4, b3, b2, b1 = tonumber(b4), tonumber(b3), tonumber(b2), tonumber(b1)
     return b1 and b2 and b3 and b4
 end
-local function checkIP(s)
+local function checkIP(s, R)
     local ip = toIP(s)
     for _, v in ipairs(ipRange) do
         if ip >= v.ip1 and ip <= v.ip2 then
-            print (string.format("[YES] ip=%s 属于 %s", s, prov))
+            --print (string.format("[YES] ip=%s 属于 %s", s, prov))
+            R[#R+1] = {ip=s, prov=prov}
+            break
         end
     end
     print(string.format("[NO] ip=%s 不属于 %s", s, prov))
 end
-local checkList = {}
+local R = {}
 if isIP(args[2]) then
-    checkIP(args[2])
+    checkIP(args[2], R)
 else
+    local n = 0
     local f = io.open(args[2], 'r')
     while true do
         local l = f:read('l')
         if not l then
             break
         end
-        checkIP(l)
+        if checkIP(l, R) then
+            n = n+1
+        end
     end
 end
+for _, v in ipairs(R) do
+    print (string.format("[YES] ip=%s 属于 %s", v.s, v.prov))
+end
+print(string.format("count=%d", #R))
