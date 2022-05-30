@@ -14,7 +14,7 @@ if #args < 2 then
     print("  从游戏日志中获取ip到ip.txt:")
     print("    cat run/log |grep 'ip=' |grep device= | awk -F ' ' '{print $7}' |awk -F '=' '{print $2}' >> ip.txt")
     print("    或者批量:")
-    print("    for f in run/log*; do cat $f |grep 'ip=' |grep device= | awk -F ' ' '{print $$7}' |awk -F '=' '{print $$2}' >> ip.txt; done")
+    print("    for f in run/log*; do cat $f |grep 'ip=' |grep device= | awk -F ' ' '{print $7}' |awk -F '=' '{print $2}' >> ip.txt; done")
     print("    cat ip.txt |sort|uniq -c|sort -k 1 -n -r > ip.1")
     for i, v in ipairs(SCODE) do
         print(string.format("  %s %s", PROV[i], v))
