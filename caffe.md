@@ -27,8 +27,8 @@ make pycaffe
 
 配置环境变量
 
-#export PYTHONPATH=/home/{user}/caffe/python:$PYTHONPATH
-#LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/usr/lib64:$LD_LIBRARY_PATH
+export PYTHONPATH=/home/{user}/caffe/python:$PYTHONPATH # caffe python目录
+export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/usr/lib64:$LD_LIBRARY_PATH # caffe python依赖的动态连接库（例如protobuf)
 
 #python
 >>Import caffe
