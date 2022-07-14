@@ -37,7 +37,7 @@ export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/usr/lib64:$LD_LIBRARY_PATH # caf
 ===
 1. 找不到google/protobuf/port_def.inc文件
 ```
-protobuf版本不对，yum install protobuf-devel安装的是2.5，需要2.6
+protobuf版本不对，yum install protobuf-devel安装的是2.5，需要3.7
 wget https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.7.0.tar.gz
 tar xvf v3.7.0.tar.gz
 cd protobuf-3.7.0
