@@ -1,0 +1,27 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "install g01-server",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' install -f 'g01-server/pom.xml'",
+            "group": "build"
+        },
+        {
+            "label": "install g01-web",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' install -f 'g01-web/pom.xml'",
+            "dependsOn": "install g01-server",
+            "group": "build"
+        },
+        {
+            "label": "deploy g01-web",
+            "type": "shell",
+            "command": "cd '${config:publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web",
+            "dependsOn": "install g01-web",
+            "group": "build",
+        }
+    ]
+}

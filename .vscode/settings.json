@@ -1,0 +1,13 @@
+{
+    "maven.home": "/Users/lvshaco/dev/maven/XuZhouMaven/apache-maven-3.6.0",
+    "publish.home": "/Users/lvshaco/dev/apache-tomcat-8.5.87/wtpwebapps",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "maven.terminal.favorites": [
+        {
+            "command": "install",
+            "debug": false
+        }
+    ],
+    "maven.view": "flat",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
