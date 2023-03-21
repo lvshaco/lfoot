@@ -4,9 +4,42 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "proto",
+            "type": "shell",
+            "command": "cd g01-server/src/main/proto && sh protoc4java.sh",
+            "group": "build"
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' clean -f 'commons-util/pom.xml' && mvn -s '${config:maven.settingsFile}' clean -f 'game-kernal/pom.xml' && mvn -s '${config:maven.settingsFile}' clean -f 'game-core/pom.xml' && mvn -s '${config:maven.settingsFile}' clean -f 'g01-server/pom.xml' && mvn -s '${config:maven.settingsFile}' clean -f 'g01-web/pom.xml'",
+            "group": "build"
+        },
+        {
+            "label": "install commons-util",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' install -f 'commons-util/pom.xml'",
+            "group": "build"
+        },
+        {
+            "label": "install gamble-kernal",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' install -f 'game-kernal/pom.xml'",
+            "dependsOn": "install commons-util",
+            "group": "build"
+        },
+        {
+            "label": "install gamble-core",
+            "type": "shell",
+            "command": "mvn -s '${config:maven.settingsFile}' install -f 'game-core/pom.xml'",
+            "dependsOn": "install gamble-kernal",
+            "group": "build"
+        },
+        {
             "label": "install g01-server",
             "type": "shell",
             "command": "mvn -s '${config:maven.settingsFile}' install -f 'g01-server/pom.xml'",
+            "dependsOn": "install gamble-core",
             "group": "build"
         },
         {
@@ -19,7 +52,7 @@
         {
             "label": "deploy g01-web",
             "type": "shell",
-            "command": "cd '${config:publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web",
+            "command": "cd '${config:publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web && rm -rf g01-web-0.0.1-SNAPSHOT.war",
             "dependsOn": "install g01-web",
             "group": "build",
         }
