@@ -6,7 +6,7 @@
         {
             "label": "proto",
             "type": "shell",
-            "command": "cd g01-server/src/main/proto && sh protoc4java.sh",
+            "command": "cd g01-server/src/main/proto && sh proto2java.sh",
             "group": "build"
         },
         {
