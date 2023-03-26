@@ -50,10 +50,16 @@
             "group": "build"
         },
         {
-            "label": "deploy g01-web",
+            "label": "build && deploy g01-web",
             "type": "shell",
-            "command": "cd '${config:publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web && rm -rf g01-web-0.0.1-SNAPSHOT.war",
+            "command": "cd '${config:tomcat.publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web && rm -rf g01-web-0.0.1-SNAPSHOT.war",
             "dependsOn": "install g01-web",
+            "group": "build",
+        },
+        {
+            "label": "just deploy g01-web",
+            "type": "shell",
+            "command": "cd '${config:tomcat.publish.home}' && rm -rf g01-web && cp ${config:maven.home}/repository/com/gamble/g01-web/0.0.1-SNAPSHOT/g01-web-0.0.1-SNAPSHOT.war . && unzip g01-web-0.0.1-SNAPSHOT.war -d g01-web && rm -rf g01-web-0.0.1-SNAPSHOT.war",
             "group": "build",
         }
     ]
