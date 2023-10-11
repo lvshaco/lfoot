@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .dice-row {
+            display: flex;
+            align-items: center;
+        }
+        /* 设置所有元素的字体大小 */
+        * {
+            font-size: 40px;
+        }
+
+        /* 设置按钮的宽度和高度 */
+        button {
+            width: 300px;
+            height: 60px;
+        }
+
+        /* 设置复选框的宽度和高度 */
+        input[type="checkbox"] {
+            width: 40px;
+            height: 40px;
+        }
+        /* 设置下拉框的宽度和高度 */
+        select {
+            width: 120px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="diceSelectArea">
+        <div class="dice-row">
+            <div id ="text">选择骰子个数</div>
+            <select id="diceCount" onchange="genDiceRows()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+            </select>
+        </div>
+    </div>
+    <div id="diceArea">
+    </div>
+    <br>
+    <button id="rollButton" onclick="rollDice()">掷骰子</button>
+    <p id="results"></p>
+    <script>
+        let DiceCount = 6;
+        // 结果数组
+        let results = [];
+        for (let i = 0; i < DiceCount; i++) {
+            results[i] = 0; 
+        }
+        // 获取选择框
+        function genDiceRows() {
+            let diceArea = document.getElementById('diceArea');
+            diceArea.innerHTML = ''; // 先清空
+            DiceCount = parseInt(document.getElementById('diceCount').value);
+            results.length = DiceCount;
+            for(let i = 0; i < DiceCount; i++) {
+                let row = `
+                <div class="dice-row">
+                    <input type="checkbox" checked>
+                    <div id="text${i+1}">0</div>
+                </div>`;
+                diceArea.innerHTML += row;
+            }
+            diceArea.innerHTML += `
+            <button id="selectAllButton" onclick="selectAll()">全选</button>`;
+        }
+        genDiceRows();
+
+        function selectAll() {
+            for (let i = 1; i <= DiceCount; i++) {
+                document.getElementById('text'+i).previousElementSibling.checked = true;
+            }
+        }
+
+        function rollDice() {
+            document.getElementById('rollButton').disabled = true;
+            // 掷骰子动画: 每个骰子快速随机变化数字
+            let randomInterval = setInterval(function(){
+                for (let i = 1; i <= DiceCount; i++) {
+                    if (document.getElementById('text'+i).previousElementSibling.checked) {
+                        document.getElementById('text'+i).innerText = Math.floor(Math.random() * 6) + 1;
+                    }
+                }
+            }, 100); // 每100毫秒执行一次
+
+            setTimeout(function(){
+                clearInterval(randomInterval); // 停止快速随机
+                // 显示结果
+                for (let i = 1; i <= DiceCount; i++) {
+                    if (document.getElementById('text'+i).previousElementSibling.checked) {
+                        results[i-1] = Math.floor(Math.random() * 6) + 1; 
+                        document.getElementById('text'+i).innerText = results[i-1];
+                    }
+                }
+                document.getElementById('rollButton').disabled = false;
+
+                document.getElementById("results").innerText = results.join(' ');
+            }, 1000); // 2秒后停止并显示结果
+        }
+    </script>
+</body>
+</html>
