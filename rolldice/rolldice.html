@@ -9,24 +9,24 @@
         }
         /* 设置所有元素的字体大小 */
         * {
-            font-size: 40px;
+            font-size: 80px;
         }
 
         /* 设置按钮的宽度和高度 */
         button {
-            width: 300px;
-            height: 60px;
+            width: 600px;
+            height: 120px;
         }
 
         /* 设置复选框的宽度和高度 */
         input[type="checkbox"] {
-            width: 40px;
-            height: 40px;
+            width: 80px;
+            height: 80px;
         }
         /* 设置下拉框的宽度和高度 */
         select {
-            width: 120px;
-            height: 50px;
+            width: 240px;
+            height: 100px;
         }
     </style>
 </head>
@@ -75,9 +75,9 @@
         }
         genDiceRows();
 
-        function selectAll() {
+        function selectAll(yes=true) {
             for (let i = 1; i <= DiceCount; i++) {
-                document.getElementById('text'+i).previousElementSibling.checked = true;
+                document.getElementById('text'+i).previousElementSibling.checked = yes;
             }
         }
 
@@ -104,7 +104,8 @@
                 document.getElementById('rollButton').disabled = false;
 
                 document.getElementById("results").innerText = results.join(' ');
-            }, 1000); // 2秒后停止并显示结果
+                selectAll(false);
+            }, 500); // 1秒后停止并显示结果
         }
     </script>
 </body>
