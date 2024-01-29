@@ -1,16 +1,14 @@
 #!/bin/bash 
-NAME=local_dev
+NAME=local_dev1
 
 start() {
     if [ ! "$(docker ps -q -f name=$NAME)" ]; then
         if [ ! "$(docker ps -aq -f status=exited -f name=$NAME)" ]; then
             # --privileged选项，命令/usr/sbin/init，才能使用systemctl (-v /Users/lvshaco:/root/share:ro只读）
-            echo run 1234
-            #docker run -itd -w /root -v /Users/lvshaco:/root/share --name local_dev --privileged centos:centos7.9.2009 /usr/sbin/init
+            #docker run -itd -w /root -v /Users/lvshaco:/root/share --name local_dev1 --privileged lvsgame/centos:latest /usr/sbin/init
             # 上面的无效了，使用下面普通的，然后使用systemctl.py替代系统的systemctl
-            docker run -itd -w /root -v /Users/lvshaco:/root/share --name local_dev centos:centos7.9.2009 /bin/bash
+            docker run -itd -w /root -v /Users/lvshaco/dev:/root/dev --name local_dev1 -p 18001:18001 -p 18101:18101 -p 3306:3306 lvsgame/centos7:latest /bin/bash
         else
-            echo exist already
             docker start $NAME
         fi
 	fi
