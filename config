@@ -4,6 +4,12 @@
 #ControlMaster auto
 #ControlPath ~/.ssh/master-%r@%h:%p
 
+Host *
+    # 断开时重试连接的次数
+    ServerAliveCountMax 5
+    # 每隔5秒自动发送一个空的请求以保持连接
+    ServerAliveInterval 5
+
 Host github.com
 HostName github.com
 User git
@@ -273,6 +279,24 @@ User lddz_test_gdy
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
 
+Host lddz_test_ohk
+HostName 116.62.32.219
+User lddz_test_ohk
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_dgr
+HostName 116.62.32.219
+User lddz_test_dgr
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_test_aqhulu
+HostName 116.62.32.219
+User lddz_test_aqhulu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
 Host lddz_test_hulu
 HostName 116.62.32.219
 User lddz_test_hulu
@@ -358,31 +382,37 @@ Port 22
 IdentityFile ~/.ssh/id_rsa_dev
 ProxyCommand ssh lddz_test@lddz_test -W %h:%p
 
+Host lddz_aqhulu_root
+HostName 39.108.69.120
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+Host lddz_aqhulu
+HostName 39.108.69.120
+User lddz_aqhulu
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
 Host lddz
-HostName 103.46.136.33
+HostName 103.192.211.104
 User root
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
 
 Host lddz_hulu
-HostName 103.46.136.33
+HostName 103.192.211.104
 User lddz_hulu
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
 #ProxyCommand ssh lddz_test@lddz_test -W %h:%p
+#
 
 Host lddz_bad
 HostName 43.225.180.231
 User root
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
-
-Host lddz_hulu_bad
-HostName 43.225.180.231
-User lddz_hulu
-Port 22
-IdentityFile ~/.ssh/id_rsa_dev
-#ProxyCommand ssh lddz_test@lddz_test -W %h:%p
 
 Host lddz_1
 HostName 43.225.180.231
@@ -495,6 +525,13 @@ IdentityFile ~/.ssh/id_rsa_dev
 
 Host lddz_res
 HostName 43.225.180.230
+User root
+Port 22
+IdentityFile ~/.ssh/id_rsa_dev
+
+##############################
+Host fuugame
+HostName 8.138.136.224
 User root
 Port 22
 IdentityFile ~/.ssh/id_rsa_dev
