@@ -13,7 +13,7 @@ start() {
             # 需要分配固定ip
             # docker network create --subnet=172.18.0.0/16 mynetwork
             # docker run -itd --name XXX --net mynetwork --ip 172.18.0.2 centos:latest /bin/bash
-            docker run -itd -w /root -v /Users/lvshaco/dev:/root/dev --name local_dev1 --net mynetwork --ip 172.18.0.2 lvsgame/centos7:latest /bin/bash
+            docker run -itd -w /root -v /Users/lvshaco/dev:/root/dev --name local_dev1 --cap-add SYS_TIME --net mynetwork --ip 172.18.0.2 lvsgame/centos7:latest /bin/bash
         else
             docker start $NAME
         fi
